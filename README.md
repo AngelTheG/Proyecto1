@@ -43,6 +43,6 @@ Este proyecto consta de X clases descritas por el siguiente diagrama de clases:
 -  **Clase “Main.java”**: Bla bla bla blabla...
 
 ## Desarrollado por:
-Angel Guerrero
-Yostin Sepulveda
+- Angel Guerrero
+- Yostin Sepulveda
 
