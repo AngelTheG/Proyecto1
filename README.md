@@ -2,7 +2,7 @@
 
 En simples palabras es un traductor amigable de código morse a carácteres alfanuméricos
 
-### Ejecución
+## Ejecución
 
 Para comenzar la ejecución del proyecto se debe iniciar el documento main por medio de
 
@@ -12,7 +12,7 @@ Para comenzar la ejecución del proyecto se debe iniciar el documento main por m
 ##### Un entorno de Desarrollo IDE:
 [IMAGEN DE LA EJECUCIÓN]
 
-### Primer Lanzamiento
+## Primer Lanzamiento
 Al iniciar el documento main este va a generar una ventana:
 [Imagen]
 
