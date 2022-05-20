@@ -55,11 +55,6 @@ class MainWindow(Gtk.Window):
         btn_about = Gtk.Button(label="?")
         btn_about.connect("clicked", self.about)
 
-        #Boton para acceder al diccionario completo de traduccion
-        btn_diccionary = Gtk.Button(label="⌨")
-        btn_diccionary.connect("clicked", self.diccionary)
-
-
         #Config del Grid como contenedor principal
         grid = Gtk.Grid()
         grid.set_column_spacing(50)
@@ -103,10 +98,6 @@ class MainWindow(Gtk.Window):
         win_about = About()
         win_about.connect("destroy", Gtk.Widget.destroy)
         win_about.show_all()
-
-
-    def diccionary(self, widget):
-        print("Dialogo - DICCIONARY:type")
     
     # Detectar cambios en la entrada
     def entryInput(self, widget):
