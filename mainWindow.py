@@ -62,7 +62,7 @@ class MainWindow(Gtk.Window):
 
         grid.attach(btn_about, 0, 0, 1, 1)
         grid.attach_next_to(self.lbl_status, btn_about, Gtk.PositionType.RIGHT, 6, 1)
-        grid.attach_next_to(btn_diccionary, btn_about, Gtk.PositionType.BOTTOM, 1,1)
+        
         grid.attach_next_to(self.lbl_left, self.lbl_status,Gtk.PositionType.BOTTOM, 6,1)
         grid.attach_next_to(btn_switch, self.lbl_left,Gtk.PositionType.RIGHT, 2 , 1)
         grid.attach_next_to(self.lbl_right, btn_switch, Gtk.PositionType.RIGHT, 3, 1)
