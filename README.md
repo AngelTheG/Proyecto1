@@ -40,7 +40,12 @@ Por último el botón ? genera una ventana que mostrará información de los cre
 Este proyecto consta de X clases descritas por el siguiente diagrama de clases:
 [img del diagrama]
 
--  **Clase “Main.java”**: Bla bla bla blabla...
+**“main.py”**: Este archivo es el principal como indica su nombre y es el encargada de iniciar y mostrar la ventana principal por medio de la creación de un "mainWindow".
+**Clase "mainWindow"**: Esta clase es la clase "núcleo" ya que la gran parte de los métodos ocurren en esta clase, esta clase incorpora los siguientes métodos:
+ + ***"switchFunction"*** la que es accionada por el botón marcado con "<--->". Al ser activado cambia la modalidad de traducción entre Alfanumérico-MORSE a MORSE-Alfanumérico.
+ + ***"clearAll"*** simplemente limpia todo, la entrada y el resultado, por medio de definir el texto en cada uno de los contenedores como un string vacío ("")
+
+**Clase "about"**: En esta clase se desempeña la generación y gestión de una ventana que despliega información sobre el proyecto, además de incluir un botón que muestra el repositorio donde se aloja el proyecto por medio del navegador de preferencia. 
 
 ## Desarrollado por:
 - Angel Guerrero
