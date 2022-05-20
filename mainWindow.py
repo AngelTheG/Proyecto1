@@ -4,6 +4,7 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
 from about import About
+from alfanumerico_morse import Alfanumerico_morse
 
 class MainWindow(Gtk.Window):
     def __init__(self):
@@ -19,30 +20,35 @@ class MainWindow(Gtk.Window):
         btn_clear.connect("clicked", self.clearAll)
 
         #Boton Cambio Alfanumerico-Morse a Morse-Alfanumerico
-        btn_switch = Gtk.Button(label="<---\--->")
+        btn_switch = Gtk.Button(label="⇄")
         btn_switch.connect("clicked", self.switchFunction)
 
         #Entrada de texto
+        
         self.ent_entrada = Gtk.Entry()
-        self.ent_entrada.set_text("Ingrese palabra/s a traducir")
+        self.ent_entrada.set_placeholder_text("Ingrese palabra/s a traducir")
         self.ent_entrada.set_alignment(0.5)
         self.ent_entrada.connect("changed", self.entryInput)
+        self.ent_entrada.set_max_length(25)
+
+        
+        
+
 
         #Labels
         self.lbl_left = Gtk.Label()
-        self.lbl_left.set_text("Alfanumerico")
+        self.lbl_left.set_markup("<b><big>Alfanumerico</big></b>")
+
 
         self.lbl_right = Gtk.Label()
-        self.lbl_right.set_text("Morse")
+        self.lbl_right.set_markup("<b><big>Morse</big></b>")
 
         self.lbl_status = Gtk.Label()
-
-        self.lbl_entry_DEBUG = Gtk.Label()
 
         self.lbl_translate_info = Gtk.Label()
 
         self.lbl_result = Gtk.Label()
-        self.lbl_result.set_text("El resultado se verá aquí")
+        self.lbl_result.set_markup("<b>El resultado se verá aquí</b>")
         self.lbl_result.set_selectable(True)
 
         #Boton ? para acceder a la información
@@ -74,16 +80,20 @@ class MainWindow(Gtk.Window):
 
     def switchFunction(self, widget):
         print("Switch de traduccion")
+        self.ent_entrada.set_text("")
+        self.lbl_result.set_markup("<b>El resultado se verá aquí</b>")
         if self.lbl_left.get_text() == "Alfanumerico":
-            self.lbl_left.set_text("Morse")
-            self.lbl_right.set_text("Alfanumerico")
+            self.lbl_left.set_markup("<b><big>                Morse</big></b>")
+            self.lbl_right.set_markup("<b><big>                Alfanumerico</big></b>")
+            self.ent_entrada.set_max_length(45)
         else:
-            self.lbl_left.set_text("Alfanumerico")
-            self.lbl_right.set_text("Morse")
+            self.lbl_left.set_markup("<b><big>Alfanumerico</big></b>")
+            self.lbl_right.set_markup("<b><big>Morse</big></b>")
+            self.ent_entrada.set_max_length(25)
 
     def clearAll(self, widget):
         self.ent_entrada.set_text("")
-        self.lbl_result.set_text("El resultado se verá aquí")
+        self.lbl_result.set_markup("<b>El resultado se verá aquí</b>")
 
     def about(self, widget):
         print("Dialogo - ABOUT:type")
@@ -93,8 +103,54 @@ class MainWindow(Gtk.Window):
 
     def diccionary(self, widget):
         print("Dialogo - DICCIONARY:type")
-
+    
     def entryInput(self, widget):
-        print("Cambio detectado")
+        self.lbl_status.set_text("")
+        texto= self.ent_entrada.get_text()
+        if self.lbl_left.get_text() == "Alfanumerico":
+            codificado = self.codificar_morse(texto)
+            self.lbl_result.set_text(codificado)
+        else:
+            for letter in self.ent_entrada.get_text():
+                if letter.capitalize() in "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890,:?'@=!":
+                    self.lbl_status.set_text("Recuerda que estás traduciendo morse")
+                
 
+            #ABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890,:?'@=!
+
+            decodificado = self.decodificar_morse(texto)
+            self.lbl_result.set_text(decodificado)
+            print(decodificado)
+    
         
+    def morse_a_caracter_plano(self,morse):
+        for caracter in Alfanumerico_morse:
+            if Alfanumerico_morse[caracter] == morse:
+                return caracter
+        return ""
+    
+
+    def decodificar_morse(self,morse):
+        texto_plano = ""  
+        for caracter_morse in morse.split("/"):
+            if caracter_morse== "":
+                texto_plano += " "
+            caracter_plano = self.morse_a_caracter_plano(caracter_morse)
+            texto_plano += caracter_plano
+        return texto_plano
+
+
+    def caracter_plano_a_morse(self,caracter):
+        if caracter in Alfanumerico_morse:
+            return Alfanumerico_morse[caracter]
+        else:
+            return ""
+
+
+    def codificar_morse(self,texto_plano):
+        texto_plano = texto_plano.upper()
+        morse = "" 
+        for caracter in texto_plano:
+            caracter_codificado = self.caracter_plano_a_morse(caracter)
+            morse += caracter_codificado + "/"
+        return morse
