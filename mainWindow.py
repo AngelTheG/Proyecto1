@@ -78,6 +78,7 @@ class MainWindow(Gtk.Window):
 
         self.add(grid)
 
+    # Cambiar la modalidad de traducción
     def switchFunction(self, widget):
         print("Switch de traduccion")
         self.ent_entrada.set_text("")
@@ -91,19 +92,23 @@ class MainWindow(Gtk.Window):
             self.lbl_right.set_markup("<b><big>Morse</big></b>")
             self.ent_entrada.set_max_length(25)
 
+    # Limpiar todos los datos Entrada-Salida
     def clearAll(self, widget):
         self.ent_entrada.set_text("")
         self.lbl_result.set_markup("<b>El resultado se verá aquí</b>")
 
+    #Desplegar ventana ABOUT
     def about(self, widget):
         print("Dialogo - ABOUT:type")
         win_about = About()
         win_about.connect("destroy", Gtk.Widget.destroy)
         win_about.show_all()
 
+
     def diccionary(self, widget):
         print("Dialogo - DICCIONARY:type")
     
+    # Detectar cambios en la entrada
     def entryInput(self, widget):
         self.lbl_status.set_text("")
         texto= self.ent_entrada.get_text()
@@ -122,7 +127,9 @@ class MainWindow(Gtk.Window):
             self.lbl_result.set_text(decodificado)
             print(decodificado)
     
-        
+    
+
+    # Procesos de Decodificación
     def morse_a_caracter_plano(self,morse):
         for caracter in Alfanumerico_morse:
             if Alfanumerico_morse[caracter] == morse:
@@ -130,6 +137,7 @@ class MainWindow(Gtk.Window):
         return ""
     
 
+    # Decodifica 
     def decodificar_morse(self,morse):
         texto_plano = ""  
         for caracter_morse in morse.split("/"):
@@ -140,6 +148,7 @@ class MainWindow(Gtk.Window):
         return texto_plano
 
 
+    #
     def caracter_plano_a_morse(self,caracter):
         if caracter in Alfanumerico_morse:
             return Alfanumerico_morse[caracter]

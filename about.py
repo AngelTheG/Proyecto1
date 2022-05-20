@@ -31,5 +31,5 @@ class About(Gtk.Window):
     
     def openGit(self, widget):
         print("GITHUB Abierto")
-        os.system("sensible-browser https://github.com/AngelTheG/")
+        os.system("sensible-browser https://github.com/AngelTheG/Proyecto1")
 
